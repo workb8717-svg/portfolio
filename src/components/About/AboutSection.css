@@ -1,0 +1,333 @@
+.about-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 7rem 3.5rem 6rem;
+  box-sizing: border-box;
+  z-index: 20;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.95);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Background layer: Ferrofluid with subtle blur */
+.about-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.about-blur-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Container */
+.about-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* Header with scroll reveal */
+.about-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-section.is-visible .about-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-tag {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  font-weight: 600;
+}
+
+.about-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* Two-column layout */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  gap: 4.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+/* Left Column: ProfileCard Overrides */
+.about-profile-card-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Muted metallic chrome shine — eliminates blinding white flash */
+  --sunpillar-1: rgba(255, 255, 255, 0.45);
+  --sunpillar-2: rgba(210, 210, 220, 0.3);
+  --sunpillar-3: rgba(150, 150, 160, 0.22);
+  --sunpillar-4: rgba(190, 190, 200, 0.3);
+  --sunpillar-5: rgba(130, 130, 140, 0.22);
+  --sunpillar-6: rgba(230, 230, 240, 0.4);
+  --sunpillar-clr-1: var(--sunpillar-1);
+  --sunpillar-clr-2: var(--sunpillar-2);
+  --sunpillar-clr-3: var(--sunpillar-3);
+  --sunpillar-clr-4: var(--sunpillar-4);
+  --sunpillar-clr-5: var(--sunpillar-5);
+  --sunpillar-clr-6: var(--sunpillar-6);
+}
+
+.about-section.is-visible .about-profile-card-col {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* CRITICAL FIX FOR HOVER WHITEOUT:
+   Prevent luminosity blowout on the avatar image while maintaining 3D tilt & crisp textures */
+.about-profile-card-col .pc-avatar-content {
+  mix-blend-mode: normal !important;
+}
+
+.about-profile-card-col .pc-avatar-content .avatar {
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) !important;
+  transition: transform 120ms ease-out !important;
+}
+
+/* Tone down the shine and glare so it creates an ultra-luxury platinum shimmer instead of a white flash */
+.about-profile-card-col .pc-shine {
+  mix-blend-mode: screen !important;
+  opacity: 0.2 !important;
+}
+
+.about-profile-card-col .pc-card:hover .pc-shine,
+.about-profile-card-col .pc-card.active .pc-shine {
+  opacity: 0.35 !important;
+  filter: brightness(0.75) contrast(1.2) !important;
+}
+
+.about-profile-card-col .pc-shine::before,
+.about-profile-card-col .pc-shine::after {
+  opacity: 0.25 !important;
+}
+
+.about-profile-card-col .pc-card:hover .pc-shine::before,
+.about-profile-card-col .pc-card.active .pc-shine::before,
+.about-profile-card-col .pc-card:hover .pc-shine::after,
+.about-profile-card-col .pc-card.active .pc-shine::after {
+  opacity: 0.45 !important;
+}
+
+.about-profile-card-col .pc-glare {
+  opacity: 0.18 !important;
+  mix-blend-mode: screen !important;
+}
+
+/* REQUIRED CSS ADJUSTMENT — hide handle & status while keeping contact button */
+.about-profile-card-col .pc-handle,
+.about-profile-card-col .pc-status {
+  display: none !important;
+}
+
+/* Shift name and title cleanly above character head with breathing room */
+.about-profile-card-col .pc-details {
+  top: 1.6rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  z-index: 10 !important;
+}
+
+/* Dark theme typography adjustments on ProfileCard */
+.about-profile-card-col .pc-details h3 {
+  background-image: linear-gradient(to bottom, #ffffff, #d4d4d8) !important;
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.02em !important;
+  font-size: 1.75rem !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+}
+
+.about-profile-card-col .pc-details p {
+  background-image: linear-gradient(to bottom, #e4e4e7, #a1a1aa) !important;
+  font-family: var(--font-body) !important;
+  letter-spacing: 0.04em !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  position: static !important;
+  top: 0 !important;
+  margin: 0 auto !important;
+}
+
+/* Scale and position avatar so the character's head sits cleanly below the title */
+.about-profile-card-col .pc-avatar-content .avatar {
+  max-height: 76% !important;
+  width: auto !important;
+  bottom: -2px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) !important;
+  transition: transform 120ms ease-out !important;
+}
+
+.about-profile-card-col .pc-contact-btn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.about-profile-card-col .pc-contact-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Right Column: Content Card Placeholder with Staggered Reveal */
+.about-content-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+.about-section.is-visible .about-content-col {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.about-content-card {
+  background: rgba(18, 18, 20, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 3.5rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-content-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.about-card-badge-row {
+  display: flex;
+  align-items: center;
+}
+
+.about-author-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-brand);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.4rem 1.1rem;
+  border-radius: 100vw;
+  text-transform: uppercase;
+}
+
+.about-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-content-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.about-content-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.02rem, 1.25vw, 1.15rem);
+  line-height: 1.78;
+  color: #d4d4d8;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about-section {
+    padding: 5rem 2rem 4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: 4rem 1.25rem 3rem;
+  }
+
+  .about-content-card {
+    padding: 1.75rem;
+  }
+}

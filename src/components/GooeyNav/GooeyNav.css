@@ -1,0 +1,168 @@
+.gooey-nav-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 100vw;
+  background: rgba(14, 14, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Hidden SVG definition for the filter */
+.gooey-svg-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 1. Behind links: Gooey Liquid Layer — filtered with surface tension, 100% crisp edges */
+.gooey-liquid-layer {
+  position: absolute;
+  inset: -15px -20px;
+  pointer-events: none;
+  z-index: 2;
+  filter: url(#gooey-nav-filter);
+}
+
+/* The Liquid Sliding Pill — Bright Pure White */
+.gooey-sliding-pill {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  border-radius: 100vw;
+  background: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.8s cubic-bezier(0.25, 1, 0.35, 1),
+    width 0.8s cubic-bezier(0.25, 1, 0.35, 1),
+    height 0.8s cubic-bezier(0.25, 1, 0.35, 1);
+  will-change: transform, width, height;
+}
+
+/* Particles Layer inside Gooey Filter */
+.gooey-particles-holder {
+  position: absolute;
+  inset: 15px 20px;
+  pointer-events: none;
+}
+
+.gooey-particle {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  pointer-events: none;
+  animation: gooeyParticleAnim calc(var(--time, 1200ms)) cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.gooey-point {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: gooeyPointAnim calc(var(--time, 1200ms)) cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes gooeyParticleAnim {
+  0% {
+    transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
+    opacity: 1;
+  }
+  60% {
+    transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.3), calc(var(--end-y) * 1.3));
+    opacity: 1;
+  }
+  85% {
+    transform: rotate(calc(var(--rotate) * 0.75)) translate(calc(var(--end-x)), calc(var(--end-y)));
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(calc(var(--rotate))) translate(calc(var(--end-x) * 0.4), calc(var(--end-y) * 0.4));
+    opacity: 0;
+  }
+}
+
+@keyframes gooeyPointAnim {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(calc(var(--scale) * 0.7));
+    opacity: 1;
+  }
+  50% {
+    transform: scale(var(--scale));
+    opacity: 1;
+  }
+  80% {
+    transform: scale(calc(var(--scale) * 0.6));
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* 2. In front: Pure, Razor-Sharp Nav Links (100% Crisp, Transparent Layer) */
+.gooey-nav-links {
+  position: relative;
+  z-index: 5;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.gooey-nav-links ul {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gooey-nav-links li.nav-item {
+  position: relative;
+  border-radius: 100vw;
+  list-style: none;
+}
+
+.gooey-nav-links li.nav-item a {
+  display: inline-block;
+  padding: 0.55rem 1.25rem;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #a1a1aa;
+  border-radius: 100vw;
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.gooey-nav-links li.nav-item:hover a {
+  color: #ffffff;
+}
+
+/* Active Nav Item — Razor sharp black text on the sliding liquid white pill */
+.gooey-nav-links li.nav-item.active a {
+  color: #000000;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.gooey-nav-links li.nav-item a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
