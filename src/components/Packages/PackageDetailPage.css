@@ -583,17 +583,87 @@
 
 @media (max-width: 768px) {
   .pkg-detail-page {
-    padding: 6rem 1.25rem 4rem 1.25rem;
+    padding: 5rem 1.25rem 3.5rem 1.25rem;
+  }
+
+  .pkg-container {
+    gap: 2.5rem;
   }
 
   .pkg-top-nav {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .pkg-back-btn {
+    align-self: flex-start;
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
   }
 
   .pkg-switcher-wrap {
     width: 100%;
+    display: flex;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pkg-switcher-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pkg-switcher-pill {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.76rem;
+    flex-shrink: 0;
+  }
+
+  .pkg-shiny-headline {
+    font-size: clamp(2rem, 7.5vw, 3rem);
+  }
+
+  .pkg-main-teaser {
+    font-size: 0.95rem;
+  }
+
+  .pkg-tier-card {
+    padding: 1.75rem 1.35rem;
+    border-radius: 20px;
+    gap: 1.35rem;
+  }
+
+  .pkg-price-amount {
+    font-size: 2rem;
+  }
+
+  .pkg-tier-btn {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.88rem;
+  }
+
+  .pkg-bottom-banner {
+    padding: 1.5rem 1.25rem;
+    border-radius: 18px;
+    gap: 1.25rem;
+  }
+
+  .pkg-banner-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem 1.25rem;
+    font-size: 0.86rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pkg-detail-page {
+    padding: 4.5rem 1rem 3rem 1rem;
+  }
+
+  .pkg-tier-card {
+    padding: 1.5rem 1.15rem;
   }
 }

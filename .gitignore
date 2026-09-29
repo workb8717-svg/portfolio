@@ -24,3 +24,6 @@ cloudflared.exe
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
+.env*

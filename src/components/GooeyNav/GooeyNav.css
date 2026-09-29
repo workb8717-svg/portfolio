@@ -166,3 +166,36 @@
   outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
+
+/* Mobile & Tablet Responsiveness for GooeyNav */
+@media (max-width: 768px) {
+  .gooey-nav-container {
+    padding: 0.25rem 0.4rem;
+    max-width: 100%;
+  }
+
+  .gooey-nav-links ul {
+    gap: 0.2rem;
+  }
+
+  .gooey-nav-links li.nav-item a {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .gooey-nav-container {
+    padding: 0.2rem 0.3rem;
+  }
+
+  .gooey-nav-links ul {
+    gap: 0.15rem;
+  }
+
+  .gooey-nav-links li.nav-item a {
+    padding: 0.35rem 0.52rem;
+    font-size: 0.72rem;
+    letter-spacing: -0.02em;
+  }
+}

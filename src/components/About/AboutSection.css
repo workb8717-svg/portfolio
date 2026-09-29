@@ -315,19 +315,49 @@
   .about-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
+    justify-items: center;
+  }
+
+  .about-profile-card-col {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .about-content-col {
+    width: 100%;
+    max-width: 680px;
   }
 
   .about-section {
-    padding: 5rem 2rem 4rem;
+    padding: 6rem 2rem 5rem;
   }
 }
 
 @media (max-width: 640px) {
   .about-section {
-    padding: 4rem 1.25rem 3rem;
+    padding: 4.5rem 1.25rem 3.5rem;
+  }
+
+  .about-container {
+    gap: 2.25rem;
+  }
+
+  .about-profile-card-col {
+    max-width: 310px;
   }
 
   .about-content-card {
-    padding: 1.75rem;
+    padding: 1.75rem 1.35rem;
+    border-radius: 20px;
+    gap: 1.5rem;
+  }
+
+  .about-content-heading {
+    font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+  }
+
+  .about-content-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 }
